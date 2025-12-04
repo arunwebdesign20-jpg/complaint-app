@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Teacher, Complaint } from '../types';
 import { registerTeacher, verifyTeacher, getComplaints, updateComplaintStatus } from '../services/storageService';
-import { analyzeComplaint } from '../services/geminiService';
 
 interface TeacherModuleProps {
   onBack: () => void;
@@ -18,8 +17,6 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
   // Dashboard State
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [showNotification, setShowNotification] = useState<string | null>(null);
-  const [analyzingId, setAnalyzingId] = useState<string | null>(null);
-  const [analysisResult, setAnalysisResult] = useState<{ [key: string]: { summary: string; priority: string; advice: string } }>({});
 
   useEffect(() => {
     if (user) {
@@ -64,15 +61,6 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
     refreshComplaints();
     setShowNotification(`Notification sent: Complaint by ${studentName} resolved.`);
     setTimeout(() => setShowNotification(null), 3000);
-  };
-
-  const handleAnalyze = async (complaint: Complaint) => {
-    setAnalyzingId(complaint.id);
-    const result = await analyzeComplaint(complaint);
-    if (result) {
-        setAnalysisResult(prev => ({ ...prev, [complaint.id]: result }));
-    }
-    setAnalyzingId(null);
   };
 
   // --- Render: Auth Screen ---
@@ -231,39 +219,6 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
                       />
                     </div>
                   )}
-
-                    {/* AI Analysis Section */}
-                    <div className="mb-4">
-                        {analysisResult[complaint.id] ? (
-                             <div className="bg-indigo-50 border border-indigo-100 rounded-lg p-4 text-sm animate-fade-in">
-                                <div className="flex items-center gap-2 mb-2">
-                                     <svg className="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v2.163l.365.176A7.002 7.002 0 0 1 18 11.5c0 .324-.025.645-.074.96l-.082.392 2.062.993a1 1 0 0 1 .15 1.76l-.15.086-2.063.993.083.392c.049.315.074.636.074.96a7.002 7.002 0 0 1-4.635 6.16l-.365.177V22a1 1 0 0 1-2 0v-2.163l-.365-.176A7.002 7.002 0 0 1 6 12.5c0-.324.025-.645.074-.96l.082-.392-2.062-.993a1 1 0 0 1-.15-1.76l.15-.086 2.063-.993-.083-.392A7.002 7.002 0 0 1 11 5.163V3a1 1 0 0 1 1-1Zm0 5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z"/></svg>
-                                     <span className="font-bold text-indigo-700">AI Insight</span>
-                                </div>
-                                <p className="mb-1"><span className="font-semibold">Summary:</span> {analysisResult[complaint.id].summary}</p>
-                                <p className="mb-1"><span className="font-semibold">Priority:</span> <span className={`font-bold ${analysisResult[complaint.id].priority === 'High' ? 'text-red-600' : 'text-gray-700'}`}>{analysisResult[complaint.id].priority}</span></p>
-                                <p><span className="font-semibold">Advice:</span> {analysisResult[complaint.id].advice}</p>
-                             </div>
-                        ) : (
-                            <button
-                                onClick={() => handleAnalyze(complaint)}
-                                disabled={analyzingId === complaint.id}
-                                className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 disabled:opacity-50"
-                            >
-                                {analyzingId === complaint.id ? (
-                                    <>
-                                        <svg className="animate-spin h-3 w-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                        Analyzing...
-                                    </>
-                                ) : (
-                                    <>
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                                        Get AI Analysis
-                                    </>
-                                )}
-                            </button>
-                        )}
-                    </div>
 
                   <div className="flex justify-end pt-4 border-t border-gray-100">
                     <button
