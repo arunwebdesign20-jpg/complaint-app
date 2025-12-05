@@ -7,7 +7,7 @@ interface StartScreenProps {
 
 const StartScreen: React.FC<StartScreenProps> = ({ onNavigate }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] gap-8 p-6 animate-fade-in">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] gap-8 p-6">
       <div className="text-center space-y-4">
         <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500">
           SeaCollege Voice
@@ -18,6 +18,8 @@ const StartScreen: React.FC<StartScreenProps> = ({ onNavigate }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mt-8">
+        
+        {/* Student Button */}
         <button
           onClick={() => onNavigate('STUDENT')}
           className="group relative flex flex-col items-center p-8 bg-white border-2 border-blue-100 rounded-2xl shadow-sm hover:shadow-xl hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-1"
@@ -31,6 +33,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onNavigate }) => {
           <p className="text-gray-500 mt-2 text-center">Submit complaints and feedback instantly.</p>
         </button>
 
+        {/* Teacher Button */}
         <button
           onClick={() => onNavigate('TEACHER')}
           className="group relative flex flex-col items-center p-8 bg-white border-2 border-teal-100 rounded-2xl shadow-sm hover:shadow-xl hover:border-teal-500 transition-all duration-300 transform hover:-translate-y-1"
@@ -43,6 +46,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onNavigate }) => {
           <h2 className="text-2xl font-bold text-gray-800">Teacher</h2>
           <p className="text-gray-500 mt-2 text-center">Review submissions and resolve issues.</p>
         </button>
+
       </div>
     </div>
   );

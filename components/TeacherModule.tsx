@@ -68,16 +68,20 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[80vh] p-4">
         <button
-            onClick={onBack}
-            className="absolute top-6 left-6 text-gray-500 hover:text-teal-600 flex items-center"
+          onClick={onBack}
+          className="absolute top-6 left-6 text-gray-500 hover:text-teal-600 flex items-center"
         >
-            <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-            Back
+          <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back
         </button>
 
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-teal-100">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-teal-700">{isLogin ? 'Teacher Login' : 'Teacher Registration'}</h2>
+            <h2 className="text-3xl font-bold text-teal-700">
+              {isLogin ? 'Teacher Login' : 'Teacher Registration'}
+            </h2>
             <p className="text-gray-500 text-sm mt-2">Access the SeaCollege Faculty Dashboard</p>
           </div>
 
@@ -116,7 +120,9 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
               />
             </div>
 
-            {authError && <p className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{authError}</p>}
+            {authError && (
+              <p className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{authError}</p>
+            )}
 
             <button
               type="submit"
@@ -127,9 +133,12 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
           </form>
 
           <div className="mt-6 text-center text-sm text-gray-600">
-            {isLogin ? "First time here?" : "Already registered?"}{" "}
+            {isLogin ? 'First time here?' : 'Already registered?'}{' '}
             <button
-              onClick={() => { setIsLogin(!isLogin); setAuthError(''); }}
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setAuthError('');
+              }}
               className="text-teal-600 font-semibold hover:underline"
             >
               {isLogin ? 'Create an account' : 'Login now'}
@@ -148,7 +157,9 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <div className="bg-teal-100 p-2 rounded-lg">
-               <svg className="w-6 h-6 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              <svg className="w-6 h-6 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-800">Faculty Dashboard</h1>
@@ -164,12 +175,14 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
         </div>
       </header>
 
-      {/* Notification Toast */}
+      {/* Notification Toast (NO animation) */}
       {showNotification && (
-        <div className="fixed top-20 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl animate-bounce-in z-50">
+        <div className="fixed top-20 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl z-50">
           <div className="flex items-center">
-             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-             {showNotification}
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            {showNotification}
           </div>
         </div>
       )}
@@ -178,13 +191,17 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
       <div className="max-w-7xl mx-auto px-4 mt-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
           Pending Complaints
-          <span className="ml-3 px-3 py-1 bg-teal-100 text-teal-800 text-sm rounded-full">{complaints.length}</span>
+          <span className="ml-3 px-3 py-1 bg-teal-100 text-teal-800 text-sm rounded-full">
+            {complaints.length}
+          </span>
         </h2>
 
         {complaints.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm p-12 text-center border border-gray-100">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
             </div>
             <h3 className="text-lg font-medium text-gray-900">No Pending Complaints</h3>
             <p className="text-gray-500">All caught up! Have a great day.</p>
@@ -192,12 +209,19 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
             {complaints.map((complaint) => (
-              <div key={complaint.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition">
+              <div
+                key={complaint.id}
+                className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition"
+              >
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-lg font-bold text-gray-900">{complaint.studentName}</h3>
-                      <p className="text-sm text-gray-500">{complaint.branch} • Sem {complaint.semester}</p>
+                      <h3 className="text-lg font-bold text-gray-900">
+                        {complaint.studentName}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {complaint.branch} • Sem {complaint.semester}
+                      </p>
                     </div>
                     <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full uppercase tracking-wide">
                       {complaint.status}
@@ -205,12 +229,16 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
                   </div>
 
                   <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-100">
-                    <p className="text-gray-700 whitespace-pre-wrap">{complaint.description}</p>
+                    <p className="text-gray-700 whitespace-pre-wrap">
+                      {complaint.description}
+                    </p>
                   </div>
 
                   {complaint.photoDataUrl && (
                     <div className="mb-4">
-                      <p className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Attachment</p>
+                      <p className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">
+                        Attachment
+                      </p>
                       <img
                         src={complaint.photoDataUrl}
                         alt="Proof"
@@ -225,7 +253,9 @@ const TeacherModule: React.FC<TeacherModuleProps> = ({ onBack }) => {
                       onClick={() => handleSolve(complaint.id, complaint.studentName)}
                       className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow hover:bg-green-600 transition flex items-center"
                     >
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                       Mark as Solved
                     </button>
                   </div>

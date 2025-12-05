@@ -27,9 +27,9 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
       reader.onloadend = () => {
         setPhoto(reader.result as string);
       };
-      if (file.size > 2000000) { // 2MB limit check
-          alert("File is too large. Please upload an image smaller than 2MB.");
-          return;
+      if (file.size > 2000000) {
+        alert("File is too large. Please upload an image smaller than 2MB.");
+        return;
       }
       reader.readAsDataURL(file);
     }
@@ -50,7 +50,6 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
       timestamp: Date.now(),
     };
 
-    // Simulate network delay
     setTimeout(() => {
       saveComplaint(newComplaint);
       setLoading(false);
@@ -60,7 +59,7 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6 animate-fade-in">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6">
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
           <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -96,6 +95,7 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
         <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b pb-4">Submit a Complaint</h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          
           {/* Name */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Student Name</label>
@@ -110,6 +110,7 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
             {/* Branch */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Engineering Branch</label>
@@ -161,20 +162,23 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
                   <div className="relative">
                     <img src={photo} alt="Preview" className="mx-auto h-48 object-contain rounded" />
                     <button
-                        type="button"
-                        onClick={(e) => { e.preventDefault(); setPhoto(null); }}
-                        className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                      type="button"
+                      onClick={(e) => { e.preventDefault(); setPhoto(null); }}
+                      className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                     >
-                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </button>
                   </div>
                 ) : (
                   <>
                     <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" 
+                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <div className="flex text-sm text-gray-600">
-                      <label className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                      <label className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">
                         <span>Upload a file</span>
                         <input type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
                       </label>
@@ -195,6 +199,7 @@ const StudentModule: React.FC<StudentModuleProps> = ({ onBack }) => {
           >
             {loading ? 'Submitting...' : 'Submit Complaint'}
           </button>
+
         </form>
       </div>
     </div>
