@@ -14,16 +14,15 @@ export interface Complaint {
   branch: Branch;
   semester: number;
   description: string;
-  photoDataUrl?: string; // Base64 string for the image
+  photoDataUrl?: string;
   status: 'pending' | 'solved';
   timestamp: number;
-  aiAnalysis?: string; // Optional field for AI summary
 }
 
 export interface Teacher {
   name: string;
   email: string;
-  password: string; // In a real app, this would be hashed
+  password: string;
 }
 
 export type ViewState = 'START' | 'STUDENT' | 'TEACHER';
